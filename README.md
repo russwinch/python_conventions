@@ -25,13 +25,13 @@ Spaces are preferred, as [recommended in PEP-8](https://www.python.org/dev/peps/
 
 88 characters as per [Black](https://github.com/psf/black#line-length).
 This seems to be a reasonable limit to adhere to and displays well on most platforms, even with monitors that are 
-in portrait orientations and split. Occasional small exceptions to this rule are fine for readability but don't go overboard; a hard limit of 100 is reasonable.
+in portrait orientations and split. Occasional small exceptions to this rule are fine for readability but don't go overboard; a hard limit of 100 is sensible.
 
 ### Multiline layouts
 
-[There are a number of options](https://www.python.org/dev/peps/pep-0008/#code-lay-out) for multiline layouts in PEP-8.
+There are a number of [options for multiline layouts](https://www.python.org/dev/peps/pep-0008/#code-lay-out) in PEP-8.
 Vertical alignment is the preferred style, defaulting to a single argument per line for readability, except when there are small numbers
-of arguments or when they share an association:
+of arguments or when they share an obvious association:
 ```
 # Aligned with opening delimiter.
 foo = long_function_name(var_one,
@@ -44,7 +44,7 @@ foo = long_function_name(first_name, last_name,
                          address_one, address_two, address_three)
 ```
 If there is no option other than to use the trailing indent then keep the closing parenthesis on the same line as the last
-argument to avoid sad faces into the code (this one of the reasons I don't use Black):
+argument to avoid sad faces in the code (this one of the reasons I don't use Black):
 ```
 # No:
 def long_function_name(
@@ -93,7 +93,7 @@ if (really_long_variable
 
 ### String quotes
 
-As single and double quotes are the same in Python [PEP8 leaves this open to interpretation](https://www.python.org/dev/peps/pep-0008/#string-quotes).
+Single and double quotes are the same in Python [PEP8 leaves this open to interpretation](https://www.python.org/dev/peps/pep-0008/#string-quotes).
 Use single quotes for short strings and double quotes for longer, human readable strings, ie print statements, logging etc. Single quotes are easier on the eyes than double (this is the other reason I don't use Black).
 ```
 color = `red`
@@ -144,7 +144,7 @@ Args:
   arg_b(int): what arg_b is
   
 Returns:
-  (tuple): what the returned item is
+  (tuple): what the returned item is  # this is the modification over strict Google style
 """
 ```
 Additional text can be added, but this should be the minimum for all but the simplest functions, ie obvious one liners where
@@ -157,9 +157,20 @@ def update_user(data):
 
 ### Testing
 
-Use Pytest over unittest, ```assert``` is much simpler and fixtures are very powerful.
+Use Pytest over unittest, ```assert``` is much simpler and fixtures are powerful.
 
-Unittests should be organised into three blocks, separated by a new line:
+Group tests using classes and methods and use descriptive names for the methods to help when the test fails:
+```
+class TestSomeFunctionality:
+  def test_zero_is_returned_when_no_values_are_supplied(self):
+    ...
+    
+  def test_something_else_descriptive(self):
+    ...
+```
+**Dont forget to add ```self``` to each method; the error message is very cryptic when also using fixtures**
+
+Each unit test should be organised into three blocks, separated by a new line:
 
 1. Arrange
 2. Act
@@ -178,14 +189,3 @@ def test_something_works():
   
   assert result == expected_result
 ```
-
-Group tests using classes and methods and use descriptive names for the methods to help when the test fails:
-```
-class TestSomeFunctionality:
-  def test_zero_is_returned_when_no_values_are_supplied(self):
-    ...
-    
-  def test_something_else_descriptive(self):
-    ...
-```
-**Dont forget to add 'self' to the methods, the error message can be cryptic sometimes, particularly in fixtures**
