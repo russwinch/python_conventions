@@ -8,13 +8,13 @@ As with any conventions, they should be followed consistently but not to the poi
 
 ## Contents
 
-- Spaces over tabs
-- Character limit
-- Multi line layouts
-- String quotes
-- String formatting
-- Docstrings
-- Testing
+- [Spaces over tabs](https://github.com/russwinch/python_conventions/blob/master/README.md#spaces-over-tabs)
+- [Character limit](https://github.com/russwinch/python_conventions/blob/master/README.md#character-limit)
+- [Multiline layouts](https://github.com/russwinch/python_conventions/blob/master/README.md#multiline-layouts)
+- [String quotes](https://github.com/russwinch/python_conventions/blob/master/README.md#string-quotes)
+- [String formatting](https://github.com/russwinch/python_conventions/blob/master/README.md#string-formatting)
+- [Docstrings](https://github.com/russwinch/python_conventions/blob/master/README.md#docstrings)
+- [Testing](https://github.com/russwinch/python_conventions/blob/master/README.md#testing)
 
 ### Spaces over tabs
 
@@ -26,9 +26,9 @@ Spaces are preferred, as recommended in [PEP-8](https://www.python.org/dev/peps/
 This seems to be a reasonable limit to adhere to and displays well on most platforms, even with monitors that are 
 in portrait orientations and split. Occasional exceptions are fine for readability but don't go overboard!
 
-### Multi line layouts
+### Multiline layouts
 
-There are a number of options for multi line layouts in [PEP-8]()
+[There are a number of options](https://www.python.org/dev/peps/pep-0008/#code-lay-out) for multiline layouts in PEP-8
 Vertical alignment is the preferred style, defaulting to a single argument per line for readability, except when there are small numbers
 of arguments or when they share an association:
 ```
@@ -43,7 +43,7 @@ foo = long_function_name(first_name, last_name,
                          address_one, address_two, address_three)
 ```
 If there is no option other than to use the trailing indent then keep the closing parenthesis on the same line as the last
-argument to avoid sad faces into the code (this is why I cannot use Black):
+argument to avoid sad faces into the code (this one of the reasons I don't use Black):
 
 ```
 # No:
@@ -81,7 +81,7 @@ user = (session
 ### String quotes
 
 As single and double quotes are the same [PEP8 leaves this open to interpretation](https://www.python.org/dev/peps/pep-0008/#string-quotes).
-Use single quotes for short strings and double quotes for longer, human readable strings, ie print statements, logging etc.
+Use single quotes for short strings and double quotes for longer, human readable strings, ie print statements, logging etc. Single quotes are easier on the eyes than double (this is the other reason I don't use Black).
 ```
 color = `red`
 print("My favourite color is red")
