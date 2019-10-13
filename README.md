@@ -4,31 +4,32 @@ This is my preferred style when writing Python code.
 
 This advice follows PEP-8 as closely, with some personal preference mixed in when there is room for interpretation.
 As with any conventions, they should be followed consistently but not to the point of impacting readability of code...
-...sometimes you just need a few characters extra over the character limit...
+sometimes you just need a few characters extra over the character limit...
 
 ## Contents
 
-- [Spaces over tabs](https://github.com/russwinch/python_conventions/blob/master/README.md#spaces-over-tabs)
-- [Character limit](https://github.com/russwinch/python_conventions/blob/master/README.md#character-limit)
-- [Multiline layouts](https://github.com/russwinch/python_conventions/blob/master/README.md#multiline-layouts)
-- [String quotes](https://github.com/russwinch/python_conventions/blob/master/README.md#string-quotes)
-- [String formatting](https://github.com/russwinch/python_conventions/blob/master/README.md#string-formatting)
-- [Docstrings](https://github.com/russwinch/python_conventions/blob/master/README.md#docstrings)
-- [Testing](https://github.com/russwinch/python_conventions/blob/master/README.md#testing)
+- [Spaces over tabs](#spaces-over-tabs)
+- [Character limit](#character-limit)
+- [Multiline layouts](#multiline-layouts)
+- [Binary operators](#binary-operators)
+- [String quotes](#string-quotes)
+- [String formatting](#string-formatting)
+- [Docstrings](#docstrings)
+- [Testing](#testing)
 
 ### Spaces over tabs
 
-Spaces are preferred, as recommended in [PEP-8](https://www.python.org/dev/peps/pep-0008/#tabs-or-spaces)
+Spaces are preferred, as [recommended in PEP-8](https://www.python.org/dev/peps/pep-0008/#tabs-or-spaces)
 
 ### Character limit
 
 88 characters as per [Black](https://github.com/psf/black#line-length).
 This seems to be a reasonable limit to adhere to and displays well on most platforms, even with monitors that are 
-in portrait orientations and split. Occasional exceptions are fine for readability but don't go overboard!
+in portrait orientations and split. Occasional small exceptions to this rule are fine for readability but don't go overboard; a hard limit of 100 is reasonable.
 
 ### Multiline layouts
 
-[There are a number of options](https://www.python.org/dev/peps/pep-0008/#code-lay-out) for multiline layouts in PEP-8
+[There are a number of options](https://www.python.org/dev/peps/pep-0008/#code-lay-out) for multiline layouts in PEP-8.
 Vertical alignment is the preferred style, defaulting to a single argument per line for readability, except when there are small numbers
 of arguments or when they share an association:
 ```
@@ -44,7 +45,6 @@ foo = long_function_name(first_name, last_name,
 ```
 If there is no option other than to use the trailing indent then keep the closing parenthesis on the same line as the last
 argument to avoid sad faces into the code (this one of the reasons I don't use Black):
-
 ```
 # No:
 def long_function_name(
@@ -78,9 +78,22 @@ user = (session
         .all())
 ```
 
+### Binary operators
+
+It's permissable in PEP-8 to break [before or after](https://www.python.org/dev/peps/pep-0008/#should-a-line-break-before-or-after-a-binary-operator) binary operators but Knuth's style of breaking before the operator is preferable for readability:
+```
+total = (first_sold_item
+         + second_sold_item
+         - bought_item)
+
+if (really_long_variable
+    == other_really_long_variable):
+    ...
+```
+
 ### String quotes
 
-As single and double quotes are the same [PEP8 leaves this open to interpretation](https://www.python.org/dev/peps/pep-0008/#string-quotes).
+As single and double quotes are the same in Python [PEP8 leaves this open to interpretation](https://www.python.org/dev/peps/pep-0008/#string-quotes).
 Use single quotes for short strings and double quotes for longer, human readable strings, ie print statements, logging etc. Single quotes are easier on the eyes than double (this is the other reason I don't use Black).
 ```
 color = `red`
@@ -91,7 +104,7 @@ with English as a second language...unless they are particularly painful to use 
 
 ### String formatting
 
-F-strings, introduced in Python 3.6 are genreally the neatest way to insert data into strings:
+F-strings, introduced in Python 3.6 are generally the neatest way to insert data into strings:
 ```
 animals = ['dogs', 'cats']
 for a in animals:
@@ -100,8 +113,8 @@ for a in animals:
 print(f"1 plus 1 is {1 + 1}")
 ```
 
-The exception is some kind of template needs to be created reused multiple times in different places in the code
-and then the ```.format``` method should to be used:
+The exception is some kind of template that needs to be created reused multiple times in different places in the code,
+here the ```.format``` method should to be used:
 ```
 # bad example hopefully useful
 query = "I would like to find out about {}"
@@ -116,10 +129,10 @@ else:
 
 ### Docstrings
 
-Docstrings should be applied to all modules, classes, methods and functions to aid those using them in future.
-They should be contained within triple double quotes """.
+Docstrings should be applied to all modules, classes, methods and functions to aid anyone using them in future.
+As per [PEP-257](https://www.python.org/dev/peps/pep-0257/) Docstrings are contained within triple double quotes """.
 
-Perfer the [Google style of docstrings](http://google.github.io/styleguide/pyguide.html#381-docstrings)
+Prefer the [Google style of docstrings](http://google.github.io/styleguide/pyguide.html#381-docstrings)
 with a subtle modification to the ```Returns / Yields``` section to show the type in brackets for consistency 
 with those in the Args section:
 ```
@@ -134,7 +147,7 @@ Returns:
   (tuple): what the returned item is
 """
 ```
-Additional text can be added, but this should be the minumum for all but the simplest functions, ie obvious one liners where
+Additional text can be added, but this should be the minimum for all but the simplest functions, ie obvious one liners where
 the one liner version of the docstring can be used:
 ```
 def update_user(data):
@@ -148,13 +161,13 @@ Use Pytest over unittest, ```assert``` is much simpler and fixtures are very pow
 
 Unittests should be organised into three blocks, separated by a new line:
 
-1. arrange
-2. act
-3. assert
+1. Arrange
+2. Act
+3. Assert
 
-I put the expected result on the end of the act as I find this is best for readability.
+Put the expected result on the end of the *Act* block as this is best for readability.
 
-For consistency use `result` and `expected_result` as variable names:
+For consistency `result` and `expected_result` can be used as variable names:
 ```
 def test_something_works():
   some_data = ['a', 'b', 'c']
