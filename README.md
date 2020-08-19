@@ -70,7 +70,7 @@ def long_function_name(
 somevar = [
   'things',
   'stuff',
-  'others'
+  'others',
 ]
 ```
 
