@@ -3,8 +3,8 @@
 This is my preferred style when writing Python code. 
 
 This advice follows PEP-8 as closely, with some personal preference mixed in when there is room for interpretation.
-As with any conventions, they should be followed consistently but not to the point of impacting readability of code...
-sometimes you just need a few characters extra over the character limit...
+As with any conventions, they should be followed consistently but not to the point of impacting readability of code.
+*sometimes you just need a few characters extra over the character limit...*
 
 ## Contents
 
@@ -25,7 +25,7 @@ Spaces are preferred, as [recommended in PEP-8](https://www.python.org/dev/peps/
 
 88 characters as per [Black](https://github.com/psf/black#line-length).
 This seems to be a reasonable limit to adhere to and displays well on most platforms, even with monitors that are 
-in portrait orientations and split. Occasional small exceptions to this rule are fine for readability but don't go overboard; a hard limit of 100 is sensible.
+in portrait orientations and split. Occasional exceptions to this rule are of course fine for readability, but a hard limit of 100-120 is sensible.
 
 ### Multiline layouts
 
@@ -44,14 +44,14 @@ foo = long_function_name(first_name, last_name,
                          address_one, address_two, address_three)
 ```
 If there is no option other than to use the trailing indent then keep the closing parenthesis on the same line as the last
-argument to avoid sad faces in the code (this one of the reasons I don't use Black):
+argument to avoid sad faces in the code (this one of the reasons I don't use [Black](https://black.readthedocs.io/en/stable/)):
 ```
 # No:
 def long_function_name(
   var_one,
   var_two,
   var_three
-  ):  # why so sad?
+):  # why so sad?
 
 # Yes:
 def long_function_name(
@@ -59,8 +59,22 @@ def long_function_name(
   var_two,
   var_three):
 ```
+If reducing git diffs is important, always use the multi-line version, with commas after each line:
+```
+def long_function_name(
+  var_one,
+  var_two,
+  var_three,
+):
+  
+somevar = [
+  'things',
+  'stuff',
+  'others'
+]
+```
 
-When using . syntax avoid train-wreck code (ie SQLAlchemy queries) by using parenthesis and breaking on the . rather than using
+When using . syntax hide your train-wreck code (ie SQLAlchemy queries) by using parenthesis and breaking on the . rather than using
 backslashes:
 ```
 # No:
@@ -132,9 +146,7 @@ else:
 Docstrings should be applied to all modules, classes, methods and functions to aid anyone using them in future.
 As per [PEP-257](https://www.python.org/dev/peps/pep-0257/) Docstrings are contained within triple double quotes """.
 
-Prefer the [Google style of docstrings](http://google.github.io/styleguide/pyguide.html#381-docstrings)
-with a subtle modification to the ```Returns / Yields``` section to show the type in brackets for consistency 
-with those in the Args section:
+Prefer the [Google style of docstrings](http://google.github.io/styleguide/pyguide.html#381-docstrings):
 ```
 def my_func(arg_a, arg_b):
 """Describe the purpose of the function here.
@@ -144,7 +156,10 @@ Args:
   arg_b(int): what arg_b is
   
 Returns:
-  (tuple): what the returned item is  # this is the modification over strict Google style
+  tuple: what the returned item is  # this is the modification over strict Google style
+  
+Raises:
+  ValueError: reason for this error
 """
 ```
 Additional text can be added, but this should be the minimum for all but the simplest functions, ie obvious one liners where
@@ -168,7 +183,7 @@ class TestSomeFunctionality:
   def test_something_else_descriptive(self):
     ...
 ```
-**Dont forget to add ```self``` to each method; the error message is very cryptic when also using fixtures**
+*Dont forget to add ```self``` to each method when using classes to organise tests; the error message is very cryptic when also using fixtures*
 
 Each unit test should be organised into three blocks, separated by a new line:
 
@@ -178,14 +193,14 @@ Each unit test should be organised into three blocks, separated by a new line:
 
 Put the expected result on the end of the *Act* block as this is best for readability.
 
-For consistency `result` and `expected_result` can be used as variable names:
+For consistency `result` and `expected_result` should be used as variable names, where required:
 ```
 def test_something_works():
   some_data = ['a', 'b', 'c']
   other_date = 0
   
   result = func_under_test(some_data, other_data)
-  expected_result = ['cat', 'dog', 'frog']
   
+  expected_result = ['cat', 'dog', 'frog']
   assert result == expected_result
 ```
