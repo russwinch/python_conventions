@@ -135,10 +135,10 @@ query = "I would like to find out about {}"
 
 if some_thing:
   value = get_value():
-  query.format(value)
+  print(query.format(value))
 else:
   other_value = get_other_value()
-  query.format(other_value)
+  print(query.format(other_value))
 ```
 
 ### Docstrings
