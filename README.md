@@ -74,7 +74,7 @@ somevar = [
 ]
 ```
 
-When using . syntax hide your train-wreck code (ie SQLAlchemy queries) by using parenthesis and breaking on the . rather than using
+When using dot syntax hide your train-wreck code (ie SQLAlchemy queries) by using parenthesis and breaking on the . rather than using
 backslashes:
 ```
 # No:
@@ -108,7 +108,7 @@ if (really_long_variable
 ### String quotes
 
 Single and double quotes are the same in Python [PEP8 leaves this open to interpretation](https://www.python.org/dev/peps/pep-0008/#string-quotes).
-Use single quotes for short strings and double quotes for longer, human readable strings, ie print statements, logging etc. Single quotes are easier on the eyes than double (this is the other reason I don't use Black).
+Use single quotes for short strings and double quotes for longer, human readable strings, ie print statements, logging etc. Single quotes are easier on the eyes than double (this is the other reason I don't use [Black](https://black.readthedocs.io/en/stable/)).
 ```
 color = `red`
 print("My favourite color is red")
@@ -127,7 +127,7 @@ for a in animals:
 print(f"1 plus 1 is {1 + 1}")
 ```
 
-The exception is some kind of template that needs to be created reused multiple times in different places in the code,
+The exception is when a template needs to be created reused multiple times in different places in the code,
 here the ```.format``` method should to be used:
 ```
 # bad example hopefully useful
